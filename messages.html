@@ -1,0 +1,188 @@
+<Html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/site.css">
+  <style>
+	#messageSelect {
+		margin-top:116px;
+		padding-top:10px;
+		padding-right:20px;
+		padding-left:20px;
+		padding-bottom:10px;
+		border-radius:25px;
+		height:50px !important;
+		font-size:1.2em;
+	}
+	
+	#message-audio{
+		width:100%;
+		background-color:black;
+		margin:auto;
+		position:relative;
+		bottom:0px;
+		color:white;
+		
+	}
+	option.message-option {
+		width:20px;
+		border-radius: 3px;
+	}
+	.audio-wrapper {
+		width:100%;
+		margin-auto;
+		text-align:center;
+		color:white;
+		margin-bottom:0px;
+		position:relative;
+		bottom:100px;
+	}
+	a.navbar-brand{color:white !important;}
+	.whiteLink{color:white !important;}
+	body {background-color:black !important;}
+	#footer{display: absolute !important; bottom: 0px !important;}
+	@media screen and (max-width: 991px){
+		#messageSelect {
+			margin-top:20px !important;
+		}
+		.audio-wrapper {
+			bottom:60px !important;
+		}
+	}
+	#img-wrapper{
+		margin:0px;
+		padding:0px;
+		z-index:10;
+	}
+	#menu-wrapper{
+		position:absolute;
+		width:100%;
+		z-index:1000;
+	}
+  </style>
+  <script>
+  
+	var srcs = {};
+	var imgIndex = 0;
+	var timeBetween = 10000;
+	var fadeTime = 3000;
+  
+	$(document).ready(function() {
+		srcs[0] = "images/Messages1.jpg";
+		srcs[1] = "images/Messages2.jpg";
+		$('#messageSelect').on('change', setAudio);
+		setTimeout(fadebackground, timeBetween);
+	});
+	
+	function fadebackground() {
+		$('#img-wrapper').fadeOut(fadeTime,fadeinBackground);
+		
+	}
+	
+	function fadeinBackground() {
+		imgIndex++;
+		if(imgIndex > 1) {
+			imgIndex = 0;
+		}
+		$('#churchBackground').prop('src', srcs[imgIndex]);
+		$('#img-wrapper').fadeIn(fadeTime,function() {setTimeout(fadebackground, timeBetween)});
+		//;
+	}
+	
+	function setAudio() {
+		var title = $('select#messageSelect').val();
+		title = title.substring(0, title.indexOf("|") - 1);
+		var link = $('select#messageSelect option:selected').data('link');
+		var date = $('select#messageSelect option:selected').data('date');
+		var chapter = $('select#messageSelect option:selected').data('chapter');
+		$('#audio-title').html(title);
+		$('#audio-date').html(date);
+		$('#audio-chapter').html(chapter);
+		var player = $('#message-audio');
+		$('#audio-source').prop('src', link);
+		player[0].pause();
+		player[0].load();
+		player[0].oncanplaythrough = player[0].play();
+	}
+  </script>
+</head>
+<body>
+	<div id="menu-wrapper">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>  
+				<span class="icon-bar"></span> 			
+			  </button>
+			  <a class="navbar-brand" href="index.html">Dundalk<br />Presbyterian<br />Church</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a class="whiteLink" href="firsttime.html">First Time</a></li>
+				<li><a class="whiteLink" href="ministries.html">Ministries</a></li>
+				<li><a class="whiteLink" href="messages.html">Messages</a></li>
+				<li><a class="whiteLink" href="information.html">Information</a></li>
+			  </ul>
+			</div>
+		  </div>
+		</nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="img-wrapper">
+				<img id="churchBackground" src="images/Messages1.jpg" class=img-responsive" />
+			</div>
+			<div class="audio-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7">
+							<h3 id="audio-title" class="whiteLink">Christian Joy</h3>
+							<p id="audio-chapter" class="whiteLink">
+								1 Peter 1:6-9
+							</p>
+							<p id="audio-date" class="whiteLink">
+								9/9/2018
+							</p>
+							<audio id="message-audio" controls>
+								<source id="audio-source" src="https://files.stablerack.com/media/80651/2018.09.09.RonWilson.mp3" type="audio/mpeg">
+							</audio>
+						</div>
+						<div class="col-md-5">
+							<select class="form-control" id="messageSelect">
+								<optgroup label="1 Peter">
+									<option data-chapter="1 Peter 1:6-9" data-link="https://files.stablerack.com/media/80651/2018.09.09.RonWilson.mp3" selected>Christian Joy | 1 Peter 1:6-9</option>
+									<option data-chapter="1 Peter 1:1-5" data-link="https://files.stablerack.com/media/80651/2018.08.26.RonWilson.mp3" data-date="8/26/2018">Assurance | 1 Peter 1:1-5</option>
+								</optgroup>
+								<optgroup label="Mathew">
+									<option data-chapter="Matthew 21:18-22" data-link="https://files.stablerack.com/media/80651/2018.09.02.AnthonyReid.mp3" data-date="9/2/2018">Should Christians Judge? | Matthew 21:18-22</option>
+									<option data-chapter="Matthew 21:12-17" data-link="https://files.stablerack.com/media/80651/2018.08.19.AnthonyReid.mp3" data-date="8/19/2018">Worshiping Jesus | Matthew 21:12-17</option>
+								</optgroup>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="footer">
+		<div class="container" >
+			<div class="row">
+				<div id="footer-social">
+					<a href="https://www.facebook.com/pages/Dundalk-EPC/144129582323828?ref=hl" target="_blank"><img src="images/SocIcon-Facebook.png" width="48" height="49" alt="Facebook" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Twitter.png" width="48" height="49" alt="Twitter" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Pinterest.png" width="48" height="49" alt="Pinterest" class=" img-circle"></a>
+					</div>
+			</div>
+			<div class="row">
+				<p id="copyrite">© 2018 The Dundalk Presbyterian Church - All Rights Reserved.</p>
+			</div>
+		</div>
+	<div>
+</body>
+</html>

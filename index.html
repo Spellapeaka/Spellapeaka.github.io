@@ -1,0 +1,229 @@
+<Html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="css/site.css">
+  <style>
+	
+  </style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>  
+			<span class="icon-bar"></span> 			
+		  </button>
+		  <a class="navbar-brand" href="#">Dundalk<br />Presbyterian<br />Church</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="firsttime.html">First Time</a></li>
+			<li><a href="ministries.html">Ministries</a></li>
+			<li><a href="messages.html">Messages</a></li>
+			<li><a href="information.html">Information</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<img id="churchBackground" src="images/churchFront.png" class=img-responsive" />
+			
+		</div>
+		<div class="row" id="scripture">
+			<h4>
+				"And let us consider one another in order to stir up love and good works, 
+				not forsaking the assembling of ourselves together..."
+				<br /><small>Heb 10: 24-25</small>
+			</h4>
+		</div>
+	</div>
+	<div class="container-fluid" id="find-us">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 id="find-us-header">
+						Join us for Worship
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-7">
+					
+					<div class="map-wrapper">
+						<a href="https://www.google.com/maps/place/Dundalk+Presbyterian+Church/@39.2605351,-76.510569,17z/data=!3m1!4b1!4m5!3m4!1s0x89c80126a9fd16ad:0x5fccb0e78cc5d863!8m2!3d39.260531!4d-76.508375" target="_blank">
+							<div id='map'></div>
+						</a>
+							<script>
+								mapboxgl.accessToken = 'pk.eyJ1Ijoic3BlbGxhcGVha2EiLCJhIjoiY2l0eWZiOHloMDZ5cTJ4bzZvaXAyYjF5biJ9.eyDSnfBMKpce5L_bbpHumQ';
+								const map = new mapboxgl.Map({
+									container: 'map',
+									style: 'mapbox://styles/spellapeaka/cjmal48011ca22rp6ouol47dz',
+									center: [-76.508136, 39.260461],
+									zoom: 16.0
+								});
+							</script>
+						</div>
+					</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-4">
+					<h4 class="location-header">Service Hours</h4>
+					<p class="location-p">
+						<strong>Sunday</strong><br />
+						<ul class="list-group">
+							<li class="location-li">Sunday School for all ages 9:00am</li>
+							<li class="location-li">Sunday Contemporary Worship 10:00am</li>
+							<li class="location-li">Transit Youth Group 6:00pm</li>
+						</ul>
+					</p>
+					<p class="location-p">
+						<strong>Wednesday</strong><br />
+						<ul class="list-group">
+							<li class="location-li">Discovery Kids Club 6:30pm</li>
+							<li class="location-li">Adult Bible Study 6:30pm</li>
+						</ul>
+					</p>			
+					<p class="location-p center">
+						We are located at the crossroads of Merritt Boulevard and Peninsula Expressway
+					</p>					
+					<p class="location-p center">
+						1973 Merritt Blvd. Dundalk, Maryland 21222
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="statement">
+		<div class="container">
+			<div class="row" >
+				<div class="col-md-12">
+					<h2 id="statement-heading">We beleive the Word, teach the Word, live the Word</h2>
+				</div>
+			</div>
+		<!--<div class="row">
+			<div class="col-md-3">
+				<h4>What We Believe</h4>
+				<p>
+				DPC is a God-centered (as opposed to man-centered) congregation which seeks to be joyfully: 
+					<ol>
+						<li>led by the spirit</li>
+						<li>faithful to God's Word (as He has given it to us in the Bible)</li>
+						<li>obedient bond-servants to our Lord and Savior, Jesus Christ.</li>
+					</ol>
+				</p>
+			</div>
+			<div class="col-md-3">
+				<h4>What We Believe About God the Father</h4>
+				<p>
+					We believe God the Father is the first person of the Trinity 
+					(which includes God the Son and God the Holy Spirit). We believe He 
+					is absolutely sovereign over the universe He created. He is all-knowing, 
+					all powerful, and everywhere present. Since He is God, He does as He pleases 
+					in the realm of Heaven and among the inhabitants of the earth. We believe 
+					He is the creator, provider and sustainer of all life and that every 
+					living being (whether angelic, human, animal or otherwise) owes its absolute 
+					obedience and unwavering allegiance to Him alone.
+				</p>
+			</div>
+			<div class="col-md-3">
+				<h4>What We Believe About God the Son</h4>
+				<p>
+					We believe that Jesus is God, as well as the only begotten 
+					Son of God. He is the second person of the Trinity (which 
+					includes God the Father and God the Holy Spirit). 
+					We believe God the Father sent Jesus into the world, born of a virgin, 
+					to live a perfect (sin-free) life and to die on the cross to 
+					pay the penalty which God the Father demanded for the transgressions, 
+					iniquities and sins of His people. We believe that once Jesus 
+					completed His God-ordained mission, God the Father raised him 
+					from the dead. We believe Jesus commissioned His followers to go 
+					and make disciples of every nation and that after giving the 
+					commission He ascended into Heaven and is now seated at the 
+					right hand of God the Father. We believe that Jesus will return 
+					one day to judge all people at the end of human history. Until 
+					then He is the Head--Lord and Master--of His Church.
+				</p>
+			</div>
+			<div class="col-md-3">
+				<h4>What We Believe About God the Holy Spirit</h4>
+				<p>
+					The Holy Spirit is God. He is the third person of the 
+					Trinity (which includes God the Father and God the Son). 
+					We believe God the Father and Jesus the Son sent the Holy 
+					Spirit into the world to apply the cross-work of Jesus to 
+					sinners in order to birth them again, to impute Jesus' 
+					righteousness to them, and to begin conforming them into 
+					Jesus' likeness. The Holy Spirit is every Christian's 
+					sanctifier, comforter, teacher, gift giver and advocate 
+					to God the Father, His presence is the guarantee of eternal life for believing sinners.
+				</p>
+			</div>
+		</div>-->
+		</div>
+	</div>
+	<div class="container-fluid" id="profiles-wrapper">
+		<div class="container" >
+			<div class="row" id="Profiles"> 
+				<div class="row">
+					<div class="col-md-4" class="profile">
+						<h3 class="profile-title">Senior Pastor</h3>
+						<img src="images/anthony.reid.profile.jpg" class="img-responsive img-circle profile-img" />
+						<p class="profile-name">Anthony Reid, MDiv, D.Min</p>
+					</div>
+					<div class="col-md-4">
+						<h3 class="profile-title">Pastor</h3>
+						<img src="images/ron.wilson.profile.jpg" class="img-responsive img-circle profile-img" />
+						<p class="profile-name">Ron Wilson, MDiv</p>
+					</div>
+					<div class="col-md-4">
+						<h3 class="profile-title">Youth Director</h3>
+						<img src="images/Luther.profile.jpg" class="img-responsive img-circle profile-img" />
+						<p class="profile-name">Luther Tate</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<h3 class="profile-title">Administrative<br />Assistant</h3>
+						<img src="images/PAVLOSKY-STEVE-15.profile.jpg" class="img-responsive img-circle profile-img" />
+						<p class="profile-name">Jean Pavlosky</p>
+					</div>
+					<div class="col-md-4">
+						<h3 class="profile-title">Children's Director </h3>
+						<img src="images/heather.wilson.profile.jpg" class="img-responsive img-circle profile-img" />
+						<p class="profile-name">Heather Wilson</p>
+					</div>
+					<div class="col-md-4">
+						<h3 class="profile-title">Custodian</h3>
+						<img src="images/straka.kevin.profile.jpg" class="img-responsive img-circle profile-img" />
+						<p class="profile-name">Kevin Straka</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="footer">
+		<div class="container" >
+			<div class="row">
+				<div id="footer-social">
+					<a href="https://www.facebook.com/pages/Dundalk-EPC/144129582323828?ref=hl" target="_blank"><img src="images/SocIcon-Facebook.png" width="48" height="49" alt="Facebook" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Twitter.png" width="48" height="49" alt="Twitter" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Pinterest.png" width="48" height="49" alt="Pinterest" class=" img-circle"></a>
+					</div>
+			</div>
+			<div class="row">
+				<p id="copyrite">© 2018 The Dundalk Presbyterian Church - All Rights Reserved.</p>
+			</div>
+		</div>
+	<div>
+</body>
+</html>

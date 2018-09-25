@@ -1,0 +1,171 @@
+#churchBackground{
+		width:100%;
+		margin:0px;
+		z-index:100;
+	}
+	.navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+	  padding-right:20px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 15px;
+      letter-spacing: 3px;
+	  background-color:rgba(0,0,0,0.03);
+	  position:absolute;
+	  top:0;
+	  width:100%;
+	  z-index:1040px;
+	}
+	@media screen and (max-width: 767px){
+		.navbar-default .navbar-nav>li>a{
+			background-color: rgba(255,255,255,0.8);
+		}
+		.navbar-default .navbar-nav>li>a:hover{
+			background-color: rgba(255,255,255,0.9);
+		}
+	}
+	
+	#church-logo {
+		margin-top:-30px;
+	}
+	#scripture {
+		width:475px;
+		text-align:right;
+		/*padding-top:80px;*/
+		color:#999999;    /*#cc9900;*/
+		font-style:italic;
+		position:absolute;
+		top:80px;
+		right:80px;
+		letter-spacing: 1px;
+		text-shadow: 1px 1px 10px white;/*#ffff99;/*gray;*/
+	}
+	@media screen and (max-width: 1200px) {
+		#scripture {
+			display:none;
+		}
+	
+	}
+	#Profiles {
+		margin-top:80px;
+		
+		
+	}
+	.profile{
+		margin:auto;
+		border: 1px solid red;
+	}
+	
+	.profile-title {
+		margin:auto;
+		padding-bottom:20px;
+		text-align:center;
+		color:#777;
+		letter-spacing: 4px;
+		height:80px;
+	}
+	
+	.profile-name{
+		margin:auto;
+		padding-top:20px;
+		text-align:center;
+		color:#777;
+		letter-spacing: 3px;
+		margin-bottom:50px;
+	}
+	.profile-img {
+		border: 2px solid #ccb30e;
+		width:150px;
+		margin:auto;
+		box-shadow: 2px 2px 20px gray;
+	}
+	#profiles-wrapper {
+		background:#ededed;
+		padding-top:30px;
+	}
+	#statement {
+		color:#777;
+	}
+	
+	#statement h4 {
+		letter-spacing: 2px;
+		padding-bottom:30px;
+	}
+	#statement p {
+		letter-spacing: 2px;
+		padding-bottom:30px;
+	}
+	
+	#statement ol {
+		letter-spacing: 2px;
+		padding-bottom:30px;
+	}
+	#statement-heading {
+		text-align:center;
+		color:#777;
+		letter-spacing: 2px;
+		padding-top:0px;
+		padding-bottom:50px;
+	}
+	
+	.navbar-brand{
+		margin-top:0px;
+		padding-top:0px;
+	}
+	#find-us {
+		/*background: #ededed;*/
+		padding-top:30px;
+		padding-bottom:30px;
+	}
+	body { margin:0; padding:0; }
+	#map { position:absolute; top:0; bottom:0; width:90%; height: 400px; }
+	.map-wrapper {
+		margin-top:20px;
+		padding-top:20px;
+		padding-bottom: 20px;
+		width:100%;
+		height:400px;
+	}
+	#find-us-header {
+		text-align:center;
+		color: #777;
+		letter-spacing: 3px;
+		margin-top:20px;
+		margin-bottom:30px;
+		padding-bottom:30px;
+	}
+	.location-header {
+		letter-spacing: 3px;
+		color: #777;
+		text-align:center;
+	}
+	.location-p {
+		letter-spacing: 2px;
+		color: #777;
+		margin-left:40px;
+	}
+	.location-li {
+		letter-spacing: 2px;
+		color: #777;
+		margin-left:80px;
+	}
+	#footer{
+		background-color:#2d2d2d;
+	}
+	#copyrite {
+		text-align: center;
+		margin-top:30px;
+		margin-bottom:30px;
+		color:white;
+		letter-spacing: 3px;
+		font-size:small;
+	}
+	#footer-social {
+		margin-top:30px;
+		text-align:center;
+	}
+	.center {
+		text-align:center;
+	}
