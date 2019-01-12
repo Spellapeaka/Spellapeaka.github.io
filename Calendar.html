@@ -1,0 +1,45 @@
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url: 'https://www.googleapis.com/calendar/v3/calendars/cds5b7o6f3gn2144ja7l0s77qc%40group.calendar.google.com/events?key=AIzaSyBKcsxdWnMYrmObyJ2adDkcYZXCcNJgHc4',
+				type: 'get',
+				dataType: 'json',
+				success: function(events) { 
+					if(events.items.length != undefined && events.items.length > 0) {
+						ListUpcomingEvents(events.items)
+					};
+				},
+				error: function() {alert('error')}
+			})
+		})
+		
+		
+		function ListUpcomingEvents(items) {
+			var today = new Date();
+			var nextWeek = new Date();
+			nextWeek.setDate(today.getDate() + 7);
+			alert(today + ", " + nextWeek);
+			items.forEach(function(item){
+				var d = item.start.date;
+				if(d == undefined) {
+					d = item.start.dateTime;
+				}
+				var date = new Date(d);
+				if(date >= today && date <= nextWeek) {
+					alert(item.summary);
+				}
+			})
+			
+		}
+	</script>
+</head>
+
+<body>
+	<div id="events"></div>
+</body>
+
+</html>

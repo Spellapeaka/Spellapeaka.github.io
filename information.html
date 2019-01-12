@@ -90,7 +90,7 @@
 	
 	function loadEvents() {
 		$.ajax({
-			url: 'https://www.googleapis.com/calendar/v3/calendars/cds5b7o6f3gn2144ja7l0s77qc%40group.calendar.google.com/events?key=AIzaSyBKcsxdWnMYrmObyJ2adDkcYZXCcNJgHc4',
+			url: 'https://www.googleapis.com/calendar/v3/calendars/pmbpqfr699beucam10m9khsj6g%40group.calendar.google.com/events?key=AIzaSyBKcsxdWnMYrmObyJ2adDkcYZXCcNJgHc4',
 			type: 'get',
 			dataType: 'json',
 			success: function(events) { 
@@ -121,6 +121,7 @@
 			var bdate = new Date(bd);
 			return adate - bdate;
 		});
+		var count = 1;
 		items.forEach(function(item){
 			var d = item.start.date;
 			if(d == undefined) {
@@ -139,13 +140,19 @@
 					mins = '0' + mins;
 				}
 				var formatTime = hours + ':' + mins + ' ' + eve;
-				
-				eventItem += '<div class="row">';
+				if(count % 3 == 0 || count == 1) {
+					eventItem += '<div class="row">';
+				}
+				eventItem += '<div class="col-sm-4">';
 				eventItem += '<h3 class="eventHead">' + item.summary + '</h3>';
 				eventItem += '<p> Location: ' + item.location + '</p>';
 				eventItem += '<p> Day : ' + date.toDateString() + '</p>';
 				eventItem += '<p> Time: ' + formatTime + '</p>';
 				eventItem += '</div>';
+				if(count % 3 == 0 && count != 1) {
+					eventItem += '</div>';
+				}
+				count++;
 			}
 		})
 		eventItem += '</div>';
