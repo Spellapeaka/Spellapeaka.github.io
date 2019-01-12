@@ -2,12 +2,20 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+
+   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+  <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>-->
+  <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+   
+  <!--<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />-->
+  <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
   <link rel="stylesheet" href="css/site.css">
+  
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+	
   <style>
 	
   </style>
@@ -61,20 +69,40 @@
 				<div class="col-md-7">
 					
 					<div class="map-wrapper">
-						<a href="https://www.google.com/maps/place/Dundalk+Presbyterian+Church/@39.2605351,-76.510569,17z/data=!3m1!4b1!4m5!3m4!1s0x89c80126a9fd16ad:0x5fccb0e78cc5d863!8m2!3d39.260531!4d-76.508375" target="_blank">
-							<div id='map'></div>
-						</a>
-							<script>
-								mapboxgl.accessToken = 'pk.eyJ1Ijoic3BlbGxhcGVha2EiLCJhIjoiY2l0eWZiOHloMDZ5cTJ4bzZvaXAyYjF5biJ9.eyDSnfBMKpce5L_bbpHumQ';
-								const map = new mapboxgl.Map({
-									container: 'map',
-									style: 'mapbox://styles/spellapeaka/cjmal48011ca22rp6ouol47dz',
-									center: [-76.508136, 39.260461],
-									zoom: 16.0
-								});
-							</script>
-						</div>
+					<div id='mapid'></div>
+					<script>
+					var mymap = L.map('mapid').setView([39.260461,-76.508136], 15);
+
+						L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic3BlbGxhcGVha2EiLCJhIjoiY2l0eWZiOHloMDZ5cTJ4bzZvaXAyYjF5biJ9.eyDSnfBMKpce5L_bbpHumQ', {
+							maxZoom: 18,
+							attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+								'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+								'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+							id: 'mapbox.streets'
+						}).addTo(mymap);
+						
+						var marker = L.marker([39.260461,-76.508345]).addTo(mymap);
+						marker.bindPopup("<b>Dundalk Presbyterian Church</b><br />1973 Merritt Blvd. Dundalk<br />Maryland 21222<br /><a href='https://www.google.com/maps/dir//Dundalk+Presbyterian+Church,+1973+Merritt+Blvd,+Dundalk,+MD+21222/@39.2605351,-76.5105637,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x89c80126a9fd16ad:0x5fccb0e78cc5d863!2m2!1d-76.508375!2d39.260531' target='_blank'>Directions</a>").openPopup();
+						
+					</script>
+					
+						<script>
+						/*$(document).ready(function() {
+							L.mapbox.accessToken = 'pk.eyJ1Ijoic3BlbGxhcGVha2EiLCJhIjoiY2l0eWZiOHloMDZ5cTJ4bzZvaXAyYjF5biJ9.eyDSnfBMKpce5L_bbpHumQ';
+							var map = L.mapbox.map('map','Streets').setView([-76.508136, 39.260461],16.0);
+							*/
+							
+							
+							/*{
+								container: 'map',
+								style: 'mapbox://styles/spellapeaka/cjmal48011ca22rp6ouol47dz',
+								center: [-76.508136, 39.260461],
+								zoom: 16.0
+							});
+						})*/
+						</script>
 					</div>
+				</div>
 				<div class="col-md-1"></div>
 				<div class="col-md-4">
 					<h4 class="location-header">Service Hours</h4>
@@ -97,7 +125,9 @@
 						We are located at the crossroads of Merritt Boulevard and Peninsula Expressway
 					</p>					
 					<p class="location-p center">
-						1973 Merritt Blvd. Dundalk, Maryland 21222
+						<a href='https://www.google.com/maps/dir//Dundalk+Presbyterian+Church,+1973+Merritt+Blvd,+Dundalk,+MD+21222/@39.2605351,-76.5105637,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x89c80126a9fd16ad:0x5fccb0e78cc5d863!2m2!1d-76.508375!2d39.260531' target='_blank'>
+							1973 Merritt Blvd. Dundalk, Maryland 21222
+						</a>
 					</p>
 				</div>
 			</div>
@@ -110,65 +140,7 @@
 					<h2 id="statement-heading">We beleive the Word, teach the Word, live the Word</h2>
 				</div>
 			</div>
-		<!--<div class="row">
-			<div class="col-md-3">
-				<h4>What We Believe</h4>
-				<p>
-				DPC is a God-centered (as opposed to man-centered) congregation which seeks to be joyfully: 
-					<ol>
-						<li>led by the spirit</li>
-						<li>faithful to God's Word (as He has given it to us in the Bible)</li>
-						<li>obedient bond-servants to our Lord and Savior, Jesus Christ.</li>
-					</ol>
-				</p>
-			</div>
-			<div class="col-md-3">
-				<h4>What We Believe About God the Father</h4>
-				<p>
-					We believe God the Father is the first person of the Trinity 
-					(which includes God the Son and God the Holy Spirit). We believe He 
-					is absolutely sovereign over the universe He created. He is all-knowing, 
-					all powerful, and everywhere present. Since He is God, He does as He pleases 
-					in the realm of Heaven and among the inhabitants of the earth. We believe 
-					He is the creator, provider and sustainer of all life and that every 
-					living being (whether angelic, human, animal or otherwise) owes its absolute 
-					obedience and unwavering allegiance to Him alone.
-				</p>
-			</div>
-			<div class="col-md-3">
-				<h4>What We Believe About God the Son</h4>
-				<p>
-					We believe that Jesus is God, as well as the only begotten 
-					Son of God. He is the second person of the Trinity (which 
-					includes God the Father and God the Holy Spirit). 
-					We believe God the Father sent Jesus into the world, born of a virgin, 
-					to live a perfect (sin-free) life and to die on the cross to 
-					pay the penalty which God the Father demanded for the transgressions, 
-					iniquities and sins of His people. We believe that once Jesus 
-					completed His God-ordained mission, God the Father raised him 
-					from the dead. We believe Jesus commissioned His followers to go 
-					and make disciples of every nation and that after giving the 
-					commission He ascended into Heaven and is now seated at the 
-					right hand of God the Father. We believe that Jesus will return 
-					one day to judge all people at the end of human history. Until 
-					then He is the Head--Lord and Master--of His Church.
-				</p>
-			</div>
-			<div class="col-md-3">
-				<h4>What We Believe About God the Holy Spirit</h4>
-				<p>
-					The Holy Spirit is God. He is the third person of the 
-					Trinity (which includes God the Father and God the Son). 
-					We believe God the Father and Jesus the Son sent the Holy 
-					Spirit into the world to apply the cross-work of Jesus to 
-					sinners in order to birth them again, to impute Jesus' 
-					righteousness to them, and to begin conforming them into 
-					Jesus' likeness. The Holy Spirit is every Christian's 
-					sanctifier, comforter, teacher, gift giver and advocate 
-					to God the Father, His presence is the guarantee of eternal life for believing sinners.
-				</p>
-			</div>
-		</div>-->
+		
 		</div>
 	</div>
 	<div class="container-fluid" id="profiles-wrapper">

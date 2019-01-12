@@ -7,11 +7,154 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/site.css">
   <style>
+	.navbar-darkBackground {
+		background-color:rgba(230,230,230,0.85);
+	}
+	.TitleHeading {
+		position:absolute;
+		left:auto;
+		right:auto;
+		top:15%;
+		z-index:1000;
+		color:white;
+		text-align:center;
+		width:100%;
+		letter-spacing: 1px;
+		font-size:58px;
+	}
+	.TitleHeading small {
+		color:rgba(225, 227, 232,1);
+		letter-spacing: 2px;
+	}
+	.belive-header{
+		text-align:center;
+		letter-spacing: 1px;
+		cursor:pointer;
+	}
 	
+	.belive-header:hover {color:#ccb30e}
+	#beliveP {
+		text-align:center;
+	}
+	#beliveP ol {
+		text-align:left;
+		margin:auto;
+	}
+	.belive-body {
+		text-align:center;
+		letter-spacing: 1px;
+		width:80%;
+		margin:auto;
+	}
+	.believe-active{color:#ccb30e;}
+	/*color:#ccb30e*/
   </style>
+  <script>
+	$(document).ready(function() {
+		$('#beliveH').on('click', function() {
+			$('#beliveGodP').slideUp(500);
+			$('#beliveGodSonP').slideUp(500);
+			$('#beliveGodHSP').slideUp(500);
+			$('#beliveP').slideToggle(500);
+			$('.belive-header').removeClass('believe-active');
+			$('#beliveH').addClass('believe-active');
+		})
+		$('#beliveGodH').on('click', function() {
+			$('#beliveGodP').slideToggle(500);
+			$('#beliveGodSonP').slideUp(500);
+			$('#beliveGodHSP').slideUp(500);
+			$('#beliveP').slideUp(500);
+			$('.belive-header').removeClass('believe-active');
+			$('#beliveGodH').addClass('believe-active');
+		})
+		$('#beliveGodSonH').on('click', function() {
+			$('#beliveGodP').slideUp(500);
+			$('#beliveGodSonP').slideToggle(500);
+			$('#beliveGodHSP').slideUp(500);
+			$('#beliveP').slideUp(500);
+			$('.belive-header').removeClass('believe-active');
+			$('#beliveGodSonH').addClass('believe-active');
+		})
+		$('#beliveGodHSH').on('click', function() {
+			$('#beliveGodP').slideUp(500);
+			$('#beliveGodSonP').slideUp(500);
+			$('#beliveGodHSP').slideToggle(500);
+			$('#beliveP').slideUp(500);
+			$('.belive-header').removeClass('believe-active');
+			$('#beliveGodHSH').addClass('believe-active');
+		})
+		
+		loadEvents()
+		
+	})
+	
+	function loadEvents() {
+		$.ajax({
+			url: 'https://www.googleapis.com/calendar/v3/calendars/cds5b7o6f3gn2144ja7l0s77qc%40group.calendar.google.com/events?key=AIzaSyBKcsxdWnMYrmObyJ2adDkcYZXCcNJgHc4',
+			type: 'get',
+			dataType: 'json',
+			success: function(events) { 
+				if(events.items.length != undefined && events.items.length > 0) {
+					ListUpcomingEvents(events.items)
+				};
+			},
+			error: function() {alert('error')}
+		})
+	}
+	
+	function ListUpcomingEvents(items) {
+		//$('#eventsList').append('<div class="container">');
+		var eventItem = '<div class="container">';
+		var today = new Date();
+		var nextWeek = new Date();
+		nextWeek.setDate(today.getDate() + 7);
+		items.sort(function(a,b) {
+			var ad = a.start.date;
+			if(ad == undefined) {
+				ad = a.start.dateTime;
+			}
+			var adate = new Date(ad);
+			var bd = b.start.date;
+			if(bd == undefined) {
+				bd = b.start.dateTime;
+			}
+			var bdate = new Date(bd);
+			return adate - bdate;
+		});
+		items.forEach(function(item){
+			var d = item.start.date;
+			if(d == undefined) {
+				d = item.start.dateTime;
+			}
+			var date = new Date(d);
+			if(date >= today && date <= nextWeek) {
+				var hours = date.getHours();
+				var mins = date.getMinutes();
+				var eve = 'A.M.';
+				if(hours > 12) {
+					eve = 'P.M.';
+					hours = hours - 12;
+				}
+				if(mins < 10) {
+					mins = '0' + mins;
+				}
+				var formatTime = hours + ':' + mins + ' ' + eve;
+				
+				eventItem += '<div class="row">';
+				eventItem += '<h3 class="eventHead">' + item.summary + '</h3>';
+				eventItem += '<p> Location: ' + item.location + '</p>';
+				eventItem += '<p> Day : ' + date.toDateString() + '</p>';
+				eventItem += '<p> Time: ' + formatTime + '</p>';
+				eventItem += '</div>';
+			}
+		})
+		eventItem += '</div>';
+		$('#eventsList').append(eventItem);
+	}
+  </script>
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-darkBackground">
 	  <div class="container-fluid">
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,5 +175,108 @@
 		</div>
 	  </div>
 	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<img id="churchBackground" src="images/CommunityOutReachBanner.jpg" class="img-responsive" />
+		</div>
+		<div class="row TitleHeading">
+			<p>Welcome to Our Church</p>
+			
+		</div>
+	</div>
+	<div class="container">
+		<div class="row" style="padding-top:30px;">
+				<h1 id="beliveH" class="belive-header believe-active" >What We Believe</h1>
+				<div id="beliveP" class="belive-body">
+				<p>
+				DPC is a God-centered (as opposed to man-centered) congregation which seeks to be joyfully: 
+					<div class="row">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-5">
+							<ol>
+								<li>led by the spirit</li>
+								<li>faithful to God's Word (as He has given it to us in the Bible)</li>
+								<li>obedient bond-servants to our Lord and Savior, Jesus Christ.</li>
+							</ol>
+						</div>
+						<div class="col-sm-4"></div>
+					</div>
+				</p>
+				</div>
+			</div>
+			<div class="row" >
+				<h1 id="beliveGodH" class="belive-header" >What We Believe About God the Father</h1>
+				<p id="beliveGodP" class="belive-body" hidden="hidden">
+					We believe God the Father is the first person of the Trinity 
+					(which includes God the Son and God the Holy Spirit). We believe He 
+					is absolutely sovereign over the universe He created. He is all-knowing, 
+					all powerful, and everywhere present. Since He is God, He does as He pleases 
+					in the realm of Heaven and among the inhabitants of the earth. We believe 
+					He is the creator, provider and sustainer of all life and that every 
+					living being (whether angelic, human, animal or otherwise) owes its absolute 
+					obedience and unwavering allegiance to Him alone.
+				</p>
+			</div>
+			<div class="row" >
+				<h1 id="beliveGodSonH" class="belive-header" >What We Believe About God the Son</h1>
+				<p id="beliveGodSonP" class="belive-body" hidden="hidden">
+					We believe that Jesus is God, as well as the only begotten 
+					Son of God. He is the second person of the Trinity (which 
+					includes God the Father and God the Holy Spirit). 
+					We believe God the Father sent Jesus into the world, born of a virgin, 
+					to live a perfect (sin-free) life and to die on the cross to 
+					pay the penalty which God the Father demanded for the transgressions, 
+					iniquities and sins of His people. We believe that once Jesus 
+					completed His God-ordained mission, God the Father raised him 
+					from the dead. We believe Jesus commissioned His followers to go 
+					and make disciples of every nation and that after giving the 
+					commission He ascended into Heaven and is now seated at the 
+					right hand of God the Father. We believe that Jesus will return 
+					one day to judge all people at the end of human history. Until 
+					then He is the Head--Lord and Master--of His Church.
+				</p>
+			</div>
+			<div class="row" >
+				<h1 id="beliveGodHSH" class="belive-header" >What We Believe About God the Holy Spirit</h1>
+				<p id="beliveGodHSP" class="belive-body" hidden="hidden">
+					The Holy Spirit is God. He is the third person of the 
+					Trinity (which includes God the Father and God the Son). 
+					We believe God the Father and Jesus the Son sent the Holy 
+					Spirit into the world to apply the cross-work of Jesus to 
+					sinners in order to birth them again, to impute Jesus' 
+					righteousness to them, and to begin conforming them into 
+					Jesus' likeness. The Holy Spirit is every Christian's 
+					sanctifier, comforter, teacher, gift giver and advocate 
+					to God the Father, His presence is the guarantee of eternal life for believing sinners.
+				</p>
+				<div class="row" style="padding-top:30px;"></div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		
+		<div class="row" style="background:#ededed;">
+			<h1 style="text-align:center;letter-spacing: 1px;">Up Comming Events</h1>
+			<div id="eventsList">
+			
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="footer">
+		<div class="container" >
+			<div class="row">
+				<div id="footer-social">
+					<a href="https://www.facebook.com/pages/Dundalk-EPC/144129582323828?ref=hl" target="_blank"><img src="images/SocIcon-Facebook.png" width="48" height="49" alt="Facebook" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Twitter.png" width="48" height="49" alt="Twitter" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Pinterest.png" width="48" height="49" alt="Pinterest" class=" img-circle"></a>
+					</div>
+			</div>
+			<div class="row">
+				<p id="copyrite">© 2018 The Dundalk Presbyterian Church - All Rights Reserved.</p>
+			</div>
+		</div>
+	</div>
+	<div>
+	</div>
 </body>
 </html>

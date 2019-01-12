@@ -7,11 +7,32 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/site.css">
   <style>
+	.navbar-darkBackground {
+		background-color:rgba(230,230,230,0.85);
+	}
+	.TitleHeading {
+		position:absolute;
+		left:auto;
+		right:auto;
+		top:15%;
+		z-index:1000;
+		color:white;
+		text-align:center;
+		width:100%;
+		letter-spacing: 1px;
+		font-size:58px;
+	}
+	.TitleHeading small {
+		color:rgba(225, 227, 232,1);
+		letter-spacing: 2px;
+	}
+	
 	
   </style>
+  
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-darkBackground">
 	  <div class="container-fluid">
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,5 +53,33 @@
 		</div>
 	  </div>
 	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<img id="churchBackground" src="images/CommunityOutReachBanner.jpg" class="img-responsive" />
+		</div>
+		<div class="row TitleHeading">
+			<p>Welcome to Our Church</p>
+			
+		</div>
+	</div>
+	
+	<div class="container-fluid" id="footer">
+		<div class="container" >
+			<div class="row">
+				<div id="footer-social">
+					<a href="https://www.facebook.com/pages/Dundalk-EPC/144129582323828?ref=hl" target="_blank"><img src="images/SocIcon-Facebook.png" width="48" height="49" alt="Facebook" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Twitter.png" width="48" height="49" alt="Twitter" class=" img-circle"></a>
+					<a href="#" target="_blank"><img src="images/SocIcon-Pinterest.png" width="48" height="49" alt="Pinterest" class=" img-circle"></a>
+					</div>
+			</div>
+			<div class="row">
+				<p id="copyrite">© 2018 The Dundalk Presbyterian Church - All Rights Reserved.</p>
+			</div>
+		</div>
+	</div>
+	<div>
+	</div>
+	
+	
 </body>
 </html>
