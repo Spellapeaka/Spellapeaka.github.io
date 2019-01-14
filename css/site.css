@@ -4,6 +4,11 @@
 		z-index:100;
 		box-shadow: 2px 2px 20px gray;
 	}
+	#churchBackgroundMessage{
+		width:100%;
+		margin:0px;
+		z-index:100;
+	}
 	.navbar {
       padding-top: 15px;
       padding-bottom: 15px;
@@ -20,12 +25,18 @@
 	  z-index:1040px;
 	}
 	@media screen and (max-width: 767px){
-		.navbar{position:relative;}
+		.navbar{position:relative;background-color:rgba(230,230,230,0.85)}
 		.navbar-default .navbar-nav>li>a{
 			background-color: rgba(255,255,255,0.8);
 		}
 		.navbar-default .navbar-nav>li>a:hover{
 			background-color: rgba(255,255,255,0.9);
+		}
+		h2 {
+			font-size:1.3em;
+		}
+		h3 {
+			font-size:1.2em;
 		}
 	}
 	
@@ -48,6 +59,7 @@
 		#scripture {
 			display:none;
 		}
+		.TitleHeading { display:none;}
 	
 	}
 	#Profiles {

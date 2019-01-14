@@ -20,7 +20,7 @@
 		text-align:center;
 		width:100%;
 		letter-spacing: 1px;
-		font-size:58px;
+		font-size:46px;
 	}
 	.TitleHeading small {
 		color:rgba(225, 227, 232,1);
@@ -47,9 +47,26 @@
 		margin:auto;
 	}
 	.believe-active{color:#ccb30e;}
-	/*color:#ccb30e*/
+	.eventHead {
+		text-align:center;
+		color:#ccb30e;
+		font-family:"Georgia", "serif";
+	}
+	
+	.eventLocation {
+		text-align:center;
+	}
+	.eventDate {
+		text-align:center;
+	}
+	.eventTime {
+		text-align:center;
+	}
   </style>
   <script>
+  var GLOBAL_WORSHIP_INDEX = 0;
+  var GLOBAL_WORSHIP_ITEMS = {};
+  
 	$(document).ready(function() {
 		$('#beliveH').on('click', function() {
 			$('#beliveGodP').slideUp(500);
@@ -89,75 +106,79 @@
 	})
 	
 	function loadEvents() {
+	
+		var calendarId = 'pmbpqfr699beucam10m9khsj6g%40group.calendar.google.com';
+		var key = 'AIzaSyBKcsxdWnMYrmObyJ2adDkcYZXCcNJgHc4';
+		var singleEvents = true;
+		var dateMin = new Date();
+		dateMin.setDate( dateMin.getDate() - 1);
+		var dateMax = new Date();
+		dateMax.setDate(dateMin.getDate() + 7);
+		var getUrl = 'https://www.googleapis.com/calendar/v3/calendars/{calendar}/events?key={key}&singleEvents={singleEvents}&timeMax={dateMax}&timeMin={dateMin}';
+		getUrl = getUrl.replace('{calendar}',calendarId);
+		getUrl = getUrl.replace('{key}', key);
+		getUrl = getUrl.replace('{singleEvents}', singleEvents);
+		getUrl = getUrl.replace('{dateMax}', dateMax.toISOString());
+		getUrl = getUrl.replace('{dateMin}', dateMin.toISOString());
+		
+		
 		$.ajax({
-			url: 'https://www.googleapis.com/calendar/v3/calendars/pmbpqfr699beucam10m9khsj6g%40group.calendar.google.com/events?key=AIzaSyBKcsxdWnMYrmObyJ2adDkcYZXCcNJgHc4',
+			url: getUrl,
 			type: 'get',
 			dataType: 'json',
 			success: function(events) { 
 				if(events.items.length != undefined && events.items.length > 0) {
-					ListUpcomingEvents(events.items)
+					GLOBAL_WORSHIP_ITEMS = events.items;
+					loadCurrentItem(GLOBAL_WORSHIP_ITEMS[GLOBAL_WORSHIP_INDEX]);
 				};
 			},
 			error: function() {alert('error')}
 		})
 	}
 	
-	function ListUpcomingEvents(items) {
-		//$('#eventsList').append('<div class="container">');
+	function loopEvents() { 
+		if(GLOBAL_WORSHIP_INDEX >= GLOBAL_WORSHIP_ITEMS.length) {
+			GLOBAL_WORSHIP_INDEX = 0;
+		}
+		loadCurrentItem(GLOBAL_WORSHIP_ITEMS[GLOBAL_WORSHIP_INDEX++]);
+	}
+	
+	function loadCurrentItem(item) {
+	
+	$('#eventsList').hide();
+		$('#eventsList').empty();
 		var eventItem = '<div class="container">';
-		var today = new Date();
-		var nextWeek = new Date();
-		nextWeek.setDate(today.getDate() + 7);
-		items.sort(function(a,b) {
-			var ad = a.start.date;
-			if(ad == undefined) {
-				ad = a.start.dateTime;
-			}
-			var adate = new Date(ad);
-			var bd = b.start.date;
-			if(bd == undefined) {
-				bd = b.start.dateTime;
-			}
-			var bdate = new Date(bd);
-			return adate - bdate;
-		});
-		var count = 1;
-		items.forEach(function(item){
-			var d = item.start.date;
-			if(d == undefined) {
-				d = item.start.dateTime;
-			}
-			var date = new Date(d);
-			if(date >= today && date <= nextWeek) {
-				var hours = date.getHours();
-				var mins = date.getMinutes();
-				var eve = 'A.M.';
-				if(hours > 12) {
-					eve = 'P.M.';
-					hours = hours - 12;
-				}
-				if(mins < 10) {
-					mins = '0' + mins;
-				}
-				var formatTime = hours + ':' + mins + ' ' + eve;
-				if(count % 3 == 0 || count == 1) {
-					eventItem += '<div class="row">';
-				}
-				eventItem += '<div class="col-sm-4">';
-				eventItem += '<h3 class="eventHead">' + item.summary + '</h3>';
-				eventItem += '<p> Location: ' + item.location + '</p>';
-				eventItem += '<p> Day : ' + date.toDateString() + '</p>';
-				eventItem += '<p> Time: ' + formatTime + '</p>';
-				eventItem += '</div>';
-				if(count % 3 == 0 && count != 1) {
-					eventItem += '</div>';
-				}
-				count++;
-			}
-		})
+		var d = item.start.date;
+		if(d == undefined) {
+			d = item.start.dateTime;
+		}
+		var date = new Date(d);
+		var hours = date.getHours();
+		var mins = date.getMinutes();
+		var eve = 'A.M.';
+		if(hours > 12) {
+			eve = 'P.M.';
+			hours = hours - 12;
+		}
+		if(mins < 10) {
+			mins = '0' + mins;
+		}
+		var formatTime = hours + ':' + mins + ' ' + eve;
+		eventItem += '<div class="row">';
+		eventItem += '<div class="col-sm-12">';
+		eventItem += '<h3 class="eventHead">' + item.summary + '</h3>';
+		eventItem += '<p class="eventLocation">' + item.location + '</p>';
+		eventItem += '<p class="eventDate">' + date.toDateString() + '</p>';
+		eventItem += '<p class="eventTime">' + formatTime + '</p>';
+		eventItem += '</div>';
+		eventItem += '</div>';
 		eventItem += '</div>';
 		$('#eventsList').append(eventItem);
+		
+		$('#eventsList').fadeIn(1500);
+		setTimeout(loopEvents,15000);
 	}
+	
   </script>
 </head>
 <body>
@@ -193,7 +214,7 @@
 	</div>
 	<div class="container">
 		<div class="row" style="padding-top:30px;">
-				<h1 id="beliveH" class="belive-header believe-active" >What We Believe</h1>
+				<h2 id="beliveH" class="belive-header believe-active" >What We Believe</h2>
 				<div id="beliveP" class="belive-body">
 				<p>
 				DPC is a God-centered (as opposed to man-centered) congregation which seeks to be joyfully: 
@@ -212,7 +233,7 @@
 				</div>
 			</div>
 			<div class="row" >
-				<h1 id="beliveGodH" class="belive-header" >What We Believe About God the Father</h1>
+				<h2 id="beliveGodH" class="belive-header" >What We Believe About God the Father</h2>
 				<p id="beliveGodP" class="belive-body" hidden="hidden">
 					We believe God the Father is the first person of the Trinity 
 					(which includes God the Son and God the Holy Spirit). We believe He 
@@ -225,7 +246,7 @@
 				</p>
 			</div>
 			<div class="row" >
-				<h1 id="beliveGodSonH" class="belive-header" >What We Believe About God the Son</h1>
+				<h2 id="beliveGodSonH" class="belive-header" >What We Believe About God the Son</h2>
 				<p id="beliveGodSonP" class="belive-body" hidden="hidden">
 					We believe that Jesus is God, as well as the only begotten 
 					Son of God. He is the second person of the Trinity (which 
@@ -244,7 +265,7 @@
 				</p>
 			</div>
 			<div class="row" >
-				<h1 id="beliveGodHSH" class="belive-header" >What We Believe About God the Holy Spirit</h1>
+				<h2 id="beliveGodHSH" class="belive-header" >What We Believe About God the Holy Spirit</h2>
 				<p id="beliveGodHSP" class="belive-body" hidden="hidden">
 					The Holy Spirit is God. He is the third person of the 
 					Trinity (which includes God the Father and God the Son). 
@@ -262,8 +283,8 @@
 	</div>
 	<div class="container-fluid">
 		
-		<div class="row" style="background:#ededed;">
-			<h1 style="text-align:center;letter-spacing: 1px;">Up Comming Events</h1>
+		<div class="row" style="background:#ededed;padding-bottom:30px;">
+			<h2 style="text-align:center;letter-spacing: 1px;padding-top:30px;">Up Comming Events</h2>
 			<div id="eventsList">
 			
 			</div>
