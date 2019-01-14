@@ -129,7 +129,7 @@
 			success: function(events) { 
 				if(events.items.length != undefined && events.items.length > 0) {
 					GLOBAL_WORSHIP_ITEMS = events.items;
-					loadCurrentItem(GLOBAL_WORSHIP_ITEMS[GLOBAL_WORSHIP_INDEX]);
+					loadCurrentItem(GLOBAL_WORSHIP_ITEMS[GLOBAL_WORSHIP_INDEX++]);
 				};
 			},
 			error: function() {alert('error')}
@@ -140,13 +140,13 @@
 		if(GLOBAL_WORSHIP_INDEX >= GLOBAL_WORSHIP_ITEMS.length) {
 			GLOBAL_WORSHIP_INDEX = 0;
 		}
-		loadCurrentItem(GLOBAL_WORSHIP_ITEMS[GLOBAL_WORSHIP_INDEX++]);
+		$('#eventsList').fadeOut(700, function() {loadCurrentItem(GLOBAL_WORSHIP_ITEMS[GLOBAL_WORSHIP_INDEX++])});
 	}
 	
 	function loadCurrentItem(item) {
 	
-	$('#eventsList').hide();
-		$('#eventsList').empty();
+	//$('#eventsList').hide();
+		
 		var eventItem = '<div class="container">';
 		var d = item.start.date;
 		if(d == undefined) {
@@ -173,10 +173,9 @@
 		eventItem += '</div>';
 		eventItem += '</div>';
 		eventItem += '</div>';
-		$('#eventsList').append(eventItem);
+		$('#eventsList').html(eventItem);
 		
-		$('#eventsList').fadeIn(1500);
-		setTimeout(loopEvents,15000);
+		$('#eventsList').fadeIn(700,function() {setTimeout(loopEvents,8000)});
 	}
 	
   </script>

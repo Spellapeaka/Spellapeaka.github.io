@@ -8,14 +8,13 @@
   <link rel="stylesheet" href="css/site.css">
   <style>
 	#messageSelect {
-		margin-top:116px;
-		padding-top:10px;
 		padding-right:20px;
 		padding-left:20px;
 		padding-bottom:10px;
 		border-radius:25px;
 		height:50px !important;
 		font-size:1.2em;
+		margin-top:20px ;
 	}
 	
 	#message-audio{
@@ -36,23 +35,23 @@
 		margin-auto;
 		text-align:center;
 		color:white;
-		margin-bottom:0px;
+		margin-bottom:30px;
 		position:relative;
-		bottom:100px;
+		padding-bottom:30px;
+		Top:-100px;
+		background-color:black;
 	}
 	a.navbar-brand{color:white !important;}
 	.whiteLink{color:white !important;}
 	body {background-color:black !important;}
 	#footer{display: absolute !important; bottom: 0px !important;}
-	@media screen and (max-width: 991px){
-		#messageSelect {
-			margin-top:20px !important;
-		}
-		.audio-wrapper {
-			bottom:60px !important;
-		}
+
+	
+	@media screen and (max-width: 767px){
+		.audio-wrapper {top:-30px;}
 		a.navbar-brand{color:#777 !important;}
 		.whiteLink{color:#777 !Important;}
+		#menu-wrapper{position:relative;background-color:rgba(230,230,230,0.85)}
 	}
 	#img-wrapper{
 		margin:0px;
@@ -60,7 +59,7 @@
 		z-index:10;
 	}
 	#menu-wrapper{
-		position:absolute;
+		position:relative;
 		width:100%;
 		z-index:1000;
 	}
@@ -73,8 +72,8 @@
 	var fadeTime = 3000;
   
 	$(document).ready(function() {
-		srcs[0] = "images/Messages1.jpg";
-		srcs[1] = "images/Messages2.jpg";
+		srcs[1] = "images/Messages1.jpg";
+		srcs[0] = "images/Messages2.jpg";
 		$('#messageSelect').on('change', setAudio);
 		setTimeout(fadebackground, timeBetween);
 	});
@@ -85,13 +84,12 @@
 	}
 	
 	function fadeinBackground() {
-		imgIndex++;
+		
+		$('#churchBackgroundMessage').prop('src', srcs[imgIndex++]);
+		$('#img-wrapper').fadeIn(fadeTime,function() {setTimeout(fadebackground, timeBetween)});
 		if(imgIndex > 1) {
 			imgIndex = 0;
 		}
-		$('#churchBackground').prop('src', srcs[imgIndex]);
-		$('#img-wrapper').fadeIn(fadeTime,function() {setTimeout(fadebackground, timeBetween)});
-		//;
 	}
 	
 	function setAudio() {
@@ -112,7 +110,7 @@
   </script>
 </head>
 <body>
-	<!--<div id="menu-wrapper">-->
+	<div id="menu-wrapper">
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 			<div class="navbar-header">
@@ -134,7 +132,7 @@
 			</div>
 		  </div>
 		</nav>
-	<!--</div>-->
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div id="img-wrapper">
@@ -143,7 +141,7 @@
 			<div class="audio-wrapper">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-7">
+						<div class="col-md-12">
 							<h3 id="audio-title" class="whiteLink">Christian Joy</h3>
 							<p id="audio-chapter" class="whiteLink">
 								1 Peter 1:6-9
@@ -155,7 +153,9 @@
 								<source id="audio-source" src="https://files.stablerack.com/media/80651/2018.09.09.RonWilson.mp3" type="audio/mpeg">
 							</audio>
 						</div>
-						<div class="col-md-5">
+					</div>
+					<div class="row">
+						<div class="col-md-12">
 							<select class="form-control" id="messageSelect">
 								<optgroup label="1 Peter">
 									<option data-chapter="1 Peter 1:6-9" data-link="https://files.stablerack.com/media/80651/2018.09.09.RonWilson.mp3">Christian Joy | 1 Peter 1:6-9</option>
